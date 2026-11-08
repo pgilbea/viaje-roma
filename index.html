@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roma en familia, 2–6 de enero de 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --surface-2:#E7EBF1; --ink:#1E2433; --ink-soft:#4F5869; --line:#D3D9E2;
+  --ochre:#C98A12; --ochre-bg:#FBF0D9; --pine:#2E6A55; --pine-bg:#E1F0EA; --red:#B23A2E; --red-bg:#F8E3E0; --sky:#2F4F7F;
+  --serif:"Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141821; --surface:#1D2330; --surface-2:#262E3D; --ink:#E9ECF2; --ink-soft:#A9B1C0; --line:#343D4E;
+    --ochre:#E8B34A; --ochre-bg:#3A2F17; --pine:#6CC2A2; --pine-bg:#173329; --red:#F08A7E; --red-bg:#3D1F1C; --sky:#9DB8E6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141821; --surface:#1D2330; --surface-2:#262E3D; --ink:#E9ECF2; --ink-soft:#A9B1C0; --line:#343D4E;
+  --ochre:#E8B34A; --ochre-bg:#3A2F17; --pine:#6CC2A2; --pine-bg:#173329; --red:#F08A7E; --red-bg:#3D1F1C; --sky:#9DB8E6;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--sky)}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:2px;border-radius:4px}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;margin:0}
+h2{font-size:clamp(1.6rem,4.5vw,2.1rem);margin-bottom:.35em}
+h3{font-size:1.25rem}
+p{margin:.5em 0}
+.lede{color:var(--ink-soft);max-width:62ch}
+
+/* Hero */
+header.hero{padding:40px 0 28px}
+.hero h1{font-size:clamp(2.4rem,9vw,4.2rem);letter-spacing:-.01em}
+.hero .sub{font-size:1.1rem;color:var(--ink-soft);margin-top:.6em}
+.countdown{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0 26px;align-items:baseline}
+.countdown strong{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--ink)}
+.countdown span{color:var(--ink-soft)}
+
+/* Week strip */
+.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.dcol{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 8px 8px;text-align:left;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:6px;min-height:100%}
+.dcol:hover{border-color:var(--ink-soft)}
+.dcol .dname{font-size:.8rem;color:var(--ink-soft)}
+.dcol .dnum{font-family:var(--serif);font-size:1.9rem;line-height:1}
+.dcol .half{font-size:.72rem;color:var(--ink-soft)}
+.pill{display:block;font-size:.72rem;line-height:1.25;padding:4px 6px;border-radius:6px;font-weight:600}
+.p-open{background:var(--pine-bg);color:var(--pine)}
+.p-plan{background:var(--pine);color:var(--surface)}
+.p-closed{background:var(--red-bg);color:var(--red);text-decoration:line-through;text-decoration-thickness:1px}
+.p-warn{background:var(--ochre-bg);color:var(--ochre)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.8rem;color:var(--ink-soft);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+
+/* Sticky nav */
+nav.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.jump .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.jump a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:.9rem;font-weight:500;padding:6px 12px;border-radius:999px}
+nav.jump a:hover{background:var(--surface-2)}
+
+section{padding:40px 0 8px}
+
+/* Urgent */
+.urgent{background:var(--red-bg);border-left:5px solid var(--red);border-radius:6px 14px 14px 6px;padding:18px 20px;margin-top:28px}
+.urgent h2{font-size:1.5rem;color:var(--red)}
+.urgent ul{margin:.6em 0 0;padding-left:1.1em}
+.urgent li{margin:.35em 0}
+
+/* Alerts */
+.alerts{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:12px}
+.alert{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 16px}
+.alert.done{opacity:.62}
+.alert .what{font-weight:600;font-size:1.02rem}
+.alert .when{font-size:.92rem;color:var(--ink-soft)}
+.alert .status{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.badge{font-size:.8rem;font-weight:700;padding:4px 10px;border-radius:999px}
+.b-now{background:var(--red);color:#fff}
+.b-soon{background:var(--ochre-bg);color:var(--ochre)}
+.b-free{background:var(--pine-bg);color:var(--pine)}
+.alert .note{grid-column:1/-1;font-size:.9rem;color:var(--ink-soft);margin:4px 0 0}
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.85rem;font-weight:600;padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--ink-soft)}
+.check{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;cursor:pointer;user-select:none}
+.check input{width:20px;height:20px;accent-color:var(--pine)}
+.live{font-variant-numeric:tabular-nums}
+
+/* Days */
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:18px 0 0;padding-bottom:4px;scrollbar-width:none}
+.tab{font:inherit;font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.day{margin-top:18px}
+.day-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;align-items:flex-end}
+.day-head h3{font-size:1.7rem}
+.meter{display:flex;gap:14px;font-size:.85rem;color:var(--ink-soft)}
+.dots{display:inline-flex;gap:3px;vertical-align:middle;margin-left:4px}
+.dots b{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots b.on{background:var(--ochre)}
+.day-intro{color:var(--ink-soft);margin:10px 0 0;max-width:64ch}
+ol.timeline{list-style:none;margin:20px 0 0;padding:0;position:relative}
+ol.timeline::before{content:"";position:absolute;left:58px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.stop{display:grid;grid-template-columns:48px 22px 1fr;gap:0 10px;padding:0 0 18px}
+.stop .t{font-variant-numeric:tabular-nums;font-weight:600;font-size:.88rem;text-align:right;padding-top:1px}
+.stop .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--sky);margin:3px 0 0 1px;position:relative;z-index:1}
+.stop.ticket .dot{border-color:var(--red);background:var(--red)}
+.stop.rest .dot{border-color:var(--pine)}
+.stop .body h4{margin:0;font-size:1.02rem;font-weight:600}
+.stop .body p{margin:.25em 0 0;font-size:.93rem;color:var(--ink-soft)}
+.stop .kids{display:block;margin-top:6px;font-size:.88rem;color:var(--ink);background:var(--ochre-bg);border-radius:8px;padding:6px 10px}
+.stop .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.tag{font-size:.75rem;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--surface-2);color:var(--ink-soft);text-decoration:none}
+a.tag{color:var(--sky)}
+.tag.tk{background:var(--red-bg);color:var(--red)}
+.planb{background:var(--surface);border:1px dashed var(--ink-soft);border-radius:12px;padding:12px 16px;margin-top:4px;font-size:.93rem}
+.planb strong{font-weight:600}
+
+.opt{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:4px;background:var(--surface-2);border-radius:12px;width:fit-content;max-width:100%}
+.opt button{font:inherit;font-size:.9rem;font-weight:600;border:0;background:transparent;color:var(--ink-soft);padding:8px 12px;border-radius:9px;cursor:pointer}
+.opt button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+
+/* Calculator */
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px}
+.ages{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+.ages label{display:flex;flex-direction:column;font-size:.8rem;color:var(--ink-soft);gap:4px}
+.ages select{font:inherit;font-size:1rem;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);min-width:86px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:440px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink-soft);font-size:.82rem}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:700;border-bottom:none;font-size:1.05rem}
+.small{font-size:.85rem;color:var(--ink-soft)}
+
+/* Checklist */
+.checklist{list-style:none;padding:0;margin:14px 0 0;columns:2 280px;column-gap:24px}
+.checklist li{break-inside:avoid;padding:6px 0}
+.checklist label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.checklist input{width:20px;height:20px;margin-top:2px;accent-color:var(--pine);flex:none}
+
+footer{padding:40px 0 60px;color:var(--ink-soft);font-size:.85rem}
+footer ul{padding-left:1.1em}
+
+@media (max-width:520px){
+  .wrap{padding:0 14px}
+  .week{gap:4px}
+  .dcol{padding:8px 5px 6px;border-radius:10px}
+  .dcol .dnum{font-size:1.5rem}
+  .pill{font-size:.64rem;padding:3px 4px}
+  ol.timeline::before{left:50px}
+  .stop{grid-template-columns:40px 22px 1fr;gap:0 8px}
+  .alert{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <h1>Roma en familia</h1>
+  <p class="sub">Del sábado 2 al miércoles 6 de enero de 2027, con 4 adultos y 4 niños. Medio día al llegar y medio día al irnos.</p>
+  <div class="countdown" aria-live="polite">
+    <div><strong id="cdDays">–</strong> <span>días para el viaje</span></div>
+    <div><strong id="cdPending">–</strong> <span>entradas por comprar</span></div>
+  </div>
+
+  <div class="week" id="week" aria-label="Qué abre cada día del viaje"></div>
+  <div class="legend">
+    <span><i style="background:var(--pine)"></i>En nuestro plan</span>
+    <span><i style="background:var(--pine-bg);border:1px solid var(--pine)"></i>Abierto</span>
+    <span><i style="background:var(--ochre-bg);border:1px solid var(--ochre)"></i>Abierto con pega</span>
+    <span><i style="background:var(--red-bg);border:1px solid var(--red)"></i>Cerrado</span>
+  </div>
+
+  <div class="urgent" role="note">
+    <h2>Vaticano: entradas oficiales agotadas</h2>
+    <p>Habéis comprobado que la web oficial ya no tiene entradas sueltas para el 2, 4 y 5 de enero. Antes de pagar a un turoperador, probad esto, en este orden:</p>
+    <ul>
+      <li><strong>Visitas guiadas y Jardines en la web oficial.</strong> En <a href="https://tickets.museivaticani.va" target="_blank" rel="noopener">tickets.museivaticani.va</a> se venden con cupo aparte de la entrada normal. Mirad también la opción de los Jardines Vaticanos en autobús, que incluye la entrada a los museos.</li>
+      <li><strong>Revisar la web oficial cada pocos días.</strong> Las entradas no se reembolsan, pero cuando alguien cambia de fecha su reserva, se libera ese hueco.</li>
+      <li><strong>Preguntar al hotel.</strong> Los Museos tienen convenios con algunos hoteles para reservar entradas.</li>
+      <li><strong>Taquilla el mismo día (20 €).</strong> Existe, pero en fiestas la cola puede ser de varias horas. Solo para quien esté dispuesto a madrugar mucho.</li>
+      <li><strong>Turoperador, solo si es acreditado.</strong> Usad la lista oficial de operadores acreditados del Vaticano y elegid entrada con acceso sin cola, no visita guiada, si queréis gastar lo mínimo.</li>
+    </ul>
+    <p>Y si nada encaja en el presupuesto, la Basílica de San Pedro es gratuita y ya está en el plan del domingo.</p>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#alertas">Alertas de compra</a>
+    <a href="#plan">Plan día a día</a>
+    <a href="#coste">Calculadora</a>
+    <a href="#lista">Antes de ir</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="alertas" aria-labelledby="h-alertas">
+  <h2 id="h-alertas">Alertas de compra</h2>
+  <p class="lede">Ordenadas por fecha. El estado se actualiza solo. Marca cada una cuando la tengáis y se quedará guardada en este navegador. Roma y España comparten hora, así que «medianoche en Roma» es medianoche en casa.</p>
+  <ul class="alerts" id="alerts"></ul>
+</section>
+
+<section id="plan" aria-labelledby="h-plan">
+  <h2 id="h-plan">Plan día a día</h2>
+  <p class="lede">Pensado para ir a ritmo de niños: una visita grande por la mañana, comida sin prisas y tarde tranquila. He supuesto que llegáis el día 2 hacia mediodía y os vais el 6 después de comer; si es al revés, me dices y lo reordeno.</p>
+  <div class="tabs" role="tablist" id="tabs" aria-label="Días"></div>
+  <div id="dayPanel"></div>
+</section>
+
+<section id="coste" aria-labelledby="h-coste">
+  <h2 id="h-coste">Calculadora de entradas</h2>
+  <p class="lede">El precio de los niños depende de la edad. Ajusta las edades y verás cuánto sale cada sitio.</p>
+  <div class="calc">
+    <div class="ages" id="ages"></div>
+    <div class="tablewrap"><table id="costTable" aria-live="polite"></table></div>
+    <p class="small">Precios oficiales consultados en noviembre de 2026. Vaticano: 20 € + 5 € de reserva online; reducida 10 € + 5 € (de 7 a 17 años); gratis menores de 7. Coliseo: 18 €; menores de 18 gratis, pero hay que reservar su plaza igualmente. Panteón: 7 € desde julio de 2026; menores de 18 gratis. Fontana di Trevi: 2 € por persona; gratis menores de 6; solo con tarjeta. Castel Sant’Angelo: 18 € desde julio de 2026; menores de 18 gratis. El cálculo sigue la opción del martes que elijáis en el <a href="#plan">plan día a día</a>.</p>
+  </div>
+</section>
+
+<section id="lista" aria-labelledby="h-lista">
+  <h2 id="h-lista">Antes de ir</h2>
+  <ul class="checklist" id="checklist"></ul>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>Fechas y precios verificados el 8 de noviembre de 2026 en las webs oficiales y prensa italiana. Los cierres de enero de 2027 y el programa de la Befana pueden cambiar: revisad las webs oficiales la semana antes.</p>
+  <ul>
+    <li><a href="https://tickets.museivaticani.va" target="_blank" rel="noopener">Museos Vaticanos, venta oficial</a></li>
+    <li><a href="https://ticketing.colosseo.it" target="_blank" rel="noopener">Coliseo, venta oficial</a> y <a href="https://colosseo.it/orari-e-biglietti/" target="_blank" rel="noopener">horarios</a></li>
+    <li><a href="https://cultura.gov.it/luogo/pantheon" target="_blank" rel="noopener">Panteón (Ministerio de Cultura)</a></li>
+    <li><a href="https://cultura.gov.it/luogo/castel-santangelo" target="_blank" rel="noopener">Castel Sant’Angelo (Ministerio de Cultura)</a></li>
+    <li><a href="https://turismoroma.it/it/notizie/fontana-di-trevi-nuovo-sistema-di-accesso-uno-dei-simboli-di-roma" target="_blank" rel="noopener">Fontana di Trevi, nuevo acceso</a></li>
+  </ul>
+</footer>
+
+<script>
+(function(){
+  const store = {
+    get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+    set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+
+  /* ---------- Week strip ---------- */
+  const week = [
+    {id:"d2", name:"Sáb", num:2, half:"Llegada", pills:[["Vaticano abierto","p-open"],["Coliseo abierto","p-open"],["Centro histórico","p-plan"]]},
+    {id:"d3", name:"Dom", num:3, half:"Día entero", pills:[["Vaticano cerrado","p-closed"],["Coliseo gratis, colas","p-warn"],["San Pedro y Ángelus","p-plan"]]},
+    {id:"d4", name:"Lun", num:4, half:"Día entero", pills:[["Vaticano, muy lleno","p-warn"],["Coliseo","p-plan"]]},
+    {id:"d5", name:"Mar", num:5, half:"Día entero", pills:[["Vaticano o Castel Sant’Angelo","p-plan"],["Coliseo abierto","p-open"]]},
+    {id:"d6", name:"Mié", num:6, half:"Salida", pills:[["Vaticano cerrado","p-closed"],["Coliseo abierto","p-open"],["Befana","p-plan"]]}
+  ];
+  const weekEl = document.getElementById("week");
+  week.forEach(d => {
+    const b = document.createElement("button");
+    b.className = "dcol"; b.type = "button";
+    b.setAttribute("aria-label", d.name + " " + d.num + " de enero, ver plan");
+    b.innerHTML = '<span class="dname">' + d.name + '</span><span class="dnum">' + d.num + '</span><span class="half">' + d.half + '</span>' +
+      d.pills.map(p => '<span class="pill ' + p[1] + '">' + p[0] + '</span>').join("");
+    b.addEventListener("click", () => { selectDay(d.id); document.getElementById("plan").scrollIntoView(); });
+    weekEl.appendChild(b);
+  });
+
+  /* ---------- Alerts ---------- */
+  // Fechas en hora de Roma (CET = UTC+1 en nov–ene)
+  const rome = (y,m,d,h=0,mi=0) => new Date(Date.UTC(y,m-1,d,h-1,mi));
+  const alerts = [
+    {id:"vat", what:"Museos Vaticanos: entradas oficiales agotadas", when:"Buscar huecos liberados, visitas guiadas oficiales o turoperador acreditado", release:rome(2026,11,6), kind:"buy",
+      note:"Revisad la web oficial cada pocos días, mejor a primera hora, buscando el 2, 4 o 5 de enero. Mirad también las visitas guiadas oficiales y los Jardines en autobús, que tienen cupo aparte. Si al final vais con turoperador, comprobad que esté en la lista oficial de acreditados.",
+      link:"https://tickets.museivaticani.va", linkText:"Abrir web oficial"},
+    {id:"col", what:"Coliseo + Foro + Palatino para el lunes 4", when:"Salen el sábado 5 de diciembre a las 00:00", release:rome(2026,12,5), kind:"buy",
+      note:"Entrada «24h» de 18 €. Los 4 niños también necesitan su entrada gratuita y nominativa. Ten preparados los 8 nombres y entra a las 23:55 del día 4. Las franjas de primera hora vuelan en minutos.",
+      link:"https://ticketing.colosseo.it", linkText:"Abrir web oficial", cal:true},
+    {id:"colb", what:"Plan B del Coliseo: martes 5 o miércoles 6", when:"Salen el 6 y el 7 de diciembre a las 00:00", release:rome(2026,12,6), kind:"backup",
+      note:"Solo si el día 5 de diciembre no conseguís el lunes. El miércoles 6 el Coliseo abre con horario normal y podríais ir antes de la salida.",
+      link:"https://ticketing.colosseo.it", linkText:"Abrir web oficial", cal:true},
+    {id:"pan", what:"Panteón para el sábado 2 por la tarde", when:"Reserva opcional, recomendable en fin de semana", release:null, kind:"optional",
+      note:"7 € adultos, niños gratis pero con plaza reservada. Si al mirar aún no aparece el 2 de enero, vuelve a probar a principios de diciembre.",
+      link:"https://cultura.gov.it/luogo/pantheon", linkText:"Ver información"},
+    {id:"csa", what:"Castel Sant’Angelo para el martes 5 (opción B)", when:"Reserva opcional; rara vez se agota", release:null, kind:"optional",
+      note:"Adultos 18 €, menores de 18 gratis. Solo si descartáis el Vaticano. Truco: el domingo 3 es gratis para todos por ser primer domingo de mes; si al pasar por delante veis poca cola, entrad ese día y os ahorráis 72 €.",
+      link:"https://cultura.gov.it/luogo/castel-santangelo", linkText:"Ver información"},
+    {id:"free", what:"Sin reserva: Trevi, Basílica de San Pedro, Ángelus y corteo de la Befana", when:"Se paga o se entra en el momento", release:null, kind:"free",
+      note:"Trevi: 2 € por persona en el torniquete, solo tarjeta. San Pedro: entrada gratis con control de seguridad; la subida a la cúpula se paga allí."}
+  ];
+  const done = store.get("roma27-done", {});
+  const alertsEl = document.getElementById("alerts");
+
+  function calLink(a){
+    const ev = a.id === "col"
+      ? {t:"Comprar Coliseo (lunes 4 enero)", s:"20261204T235000", e:"20261205T003000"}
+      : {t:"Plan B Coliseo (5 o 6 enero)", s:"20261205T235000", e:"20261206T003000"};
+    const p = new URLSearchParams({action:"TEMPLATE", text:ev.t, dates:ev.s + "/" + ev.e, ctz:"Europe/Rome", details:"Entradas nominativas: ten los 8 nombres a mano. https://ticketing.colosseo.it"});
+    return "https://calendar.google.com/calendar/render?" + p.toString();
+  }
+
+  function fmtLeft(ms){
+    const s = Math.max(0, Math.floor(ms/1000));
+    const d = Math.floor(s/86400), h = Math.floor(s%86400/3600), m = Math.floor(s%3600/60);
+    if (d >= 2) return "faltan " + d + " días";
+    if (d === 1) return "falta 1 día y " + h + " h";
+    return "faltan " + h + " h " + m + " min";
+  }
+
+  function renderAlerts(){
+    const now = new Date();
+    alertsEl.innerHTML = "";
+    let pending = 0;
+    alerts.forEach(a => {
+      const li = document.createElement("li");
+      const isDone = !!done[a.id];
+      li.className = "alert" + (isDone ? " done" : "");
+      let badge = "";
+      if (a.kind === "free") badge = '<span class="badge b-free">No hace falta reservar</span>';
+      else if (a.kind === "optional") badge = '<span class="badge b-soon">Opcional</span>';
+      else if (a.release && now >= a.release) badge = '<span class="badge b-now">Ya a la venta</span>';
+      else if (a.release) badge = '<span class="badge b-soon live">' + fmtLeft(a.release - now) + '</span>';
+      if (a.kind === "buy" && !isDone) pending++;
+      li.innerHTML =
+        '<div><div class="what">' + a.what + '</div><div class="when">' + a.when + '</div></div>' +
+        '<div class="status">' + badge +
+          (a.link ? '<a class="btn" href="' + a.link + '" target="_blank" rel="noopener">' + a.linkText + '</a>' : '') +
+          (a.cal ? '<a class="btn" href="' + calLink(a) + '" target="_blank" rel="noopener">Recordatorio en Google Calendar</a>' : '') +
+          (a.kind !== "free" ? '<label class="check"><input type="checkbox" data-id="' + a.id + '"' + (isDone ? " checked" : "") + '> Comprado</label>' : '') +
+        '</div>' +
+        '<p class="note">' + a.note + '</p>';
+      alertsEl.appendChild(li);
+    });
+    alertsEl.querySelectorAll("input[type=checkbox]").forEach(cb => cb.addEventListener("change", e => {
+      done[e.target.dataset.id] = e.target.checked; store.set("roma27-done", done); renderAlerts();
+    }));
+    document.getElementById("cdPending").textContent = pending;
+    const trip = rome(2027,1,2,12);
+    const days = Math.ceil((trip - now) / 86400000);
+    document.getElementById("cdDays").textContent = days > 0 ? days : "¡Ya!";
+  }
+  renderAlerts();
+  setInterval(renderAlerts, 60000);
+
+  /* ---------- Days ---------- */
+  const maps = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q + ", Roma");
+  const days = [
+    {id:"d2", tab:"Sáb 2", title:"Sábado 2: primer paseo por el centro", km:"≈ 3 km", level:1,
+     intro:"Tarde corta y sin estrés: todo está a 5–10 minutos andando y no hay horarios estrictos salvo el Panteón. Es el día perfecto para que los niños se enamoren de Roma.",
+     stops:[
+      {t:"12:00", n:"Llegada y dejar maletas", d:"Comida ligera cerca del alojamiento.", type:"rest"},
+      {t:"15:00", n:"Panteón", d:"20–30 minutos dentro. La cúpula con el agujero en el techo impresiona a cualquier edad.", kids:"Reto: buscad el agujero del techo y preguntad por dónde se va el agua cuando llueve (hay desagües en el suelo).", tags:["Reserva recomendada"], q:"Pantheon", tk:true},
+      {t:"15:45", n:"Piazza Navona y el mercadillo de la Befana", d:"Puestos de dulces, tiovivo y las fuentes de Bernini. Es el sitio para comprar el calcetín de la Befana para la noche del 5.", kids:"Que cada niño elija su «calza della Befana»: se cuelga la noche del 5 y aparece llena de dulces (o de carbón de azúcar).", q:"Piazza Navona"},
+      {t:"16:45", n:"Helado y paseo hacia Trevi", d:"Unos 12 minutos andando por calles peatonales.", type:"rest"},
+      {t:"17:15", n:"Fontana di Trevi al anochecer", d:"Ya iluminada. Hay que entrar por el torniquete para bajar hasta el agua.", kids:"La tradición: moneda con la mano derecha por encima del hombro izquierdo para volver a Roma.", tags:["2 € por persona, solo tarjeta","Gratis menores de 6"], q:"Fontana di Trevi", tk:true},
+      {t:"19:00", n:"Cena temprana", d:"Muchas trattorie abren a las 19:00: perfecto para ir con niños antes de que se llenen.", type:"rest"}
+     ],
+     planb:"Si llueve: Panteón primero (ver la lluvia entrar por el óculo es un espectáculo), luego merienda bajo techo y Trevi a última hora, que con lluvia está mucho más vacía."},
+    {id:"d3", tab:"Dom 3", title:"Domingo 3: San Pedro, el Papa y Trastevere", km:"≈ 4 km", level:2,
+     intro:"El domingo los Museos Vaticanos cierran y el Coliseo es gratis por ser primer domingo de mes, lo que significa colas enormes sin reserva. Por eso es el día ideal para la basílica y el Ángelus.",
+     stops:[
+      {t:"8:15", n:"Basílica de San Pedro", d:"Entrada gratuita con control de seguridad; a primera hora la cola es corta. Hombros y rodillas cubiertos.", kids:"Buscad la Piedad de Miguel Ángel y los guardias suizos con su uniforme de rayas.", tags:["Gratis","Sin reserva"], q:"Basilica di San Pietro"},
+      {t:"9:30", n:"Cúpula (opcional)", d:"Con niños de 10 a 13 años merece mucho la pena. Se paga allí. Hay ascensor para la primera parte y después quedan unos 320 escalones estrechos; solo evitadla si alguien tiene claustrofobia.", tags:["De pago en el sitio"], q:"Cupola di San Pietro"},
+      {t:"10:45", n:"Descanso y almuerzo temprano por Borgo", d:"Buscad sitio con antelación: la plaza se llena antes del mediodía.", type:"rest"},
+      {t:"12:00", n:"Ángelus del Papa en la plaza", d:"Unos 15 minutos desde la ventana del Palacio Apostólico. Gratis, sin entrada. Se celebra si el Papa está en Roma.", kids:"Contad cuántas banderas de países distintos veis en la plaza.", tags:["Gratis"], q:"Piazza San Pietro"},
+      {t:"12:45", n:"Paseo hasta Castel Sant’Angelo", d:"10 minutos. Foto en el puente de los ángeles. Hoy el castillo es gratis para todos por ser primer domingo, sin reserva. Si elegís la opción B del martes y hoy veis poca cola, podéis adelantar la visita y ahorraros las entradas de los adultos.", q:"Castel Sant'Angelo"},
+      {t:"14:00", n:"Siesta o descanso en el alojamiento", d:"Recargar pilas es parte del plan.", type:"rest"},
+      {t:"17:00", n:"Trastevere", d:"Calles empedradas, Santa Maria in Trastevere y mucho ambiente. Con 8 personas, mejor 2 taxis o autobús.", q:"Santa Maria in Trastevere"},
+      {t:"19:00", n:"Cena en Trastevere", d:"Pizza romana fina: casi siempre un acierto con niños.", type:"rest"}
+     ],
+     planb:"Si llueve: la basílica es interior. Por la tarde, cambiad Trastevere por Explora, el museo de los niños de Roma (va por turnos con reserva; comprobad su horario en fiestas)."},
+    {id:"d4", tab:"Lun 4", title:"Lunes 4: la Roma de los gladiadores", km:"≈ 5 km", level:3,
+     intro:"El día más exigente para las piernas. El lunes es mejor día para el Coliseo que para el Vaticano, que abre lleno después del cierre del domingo.",
+     stops:[
+      {t:"9:30", n:"Coliseo", d:"Franja de entrada a primera hora. Una hora dentro es suficiente. En invierno cierra pronto (último acceso hacia las 15:30).", kids:"Antes de ir, ved un vídeo corto sobre gladiadores: dentro reconocerán dónde estaban las fieras y los pasadizos.", tags:["Entrada nominativa","Niños gratis con reserva"], q:"Colosseo", tk:true},
+      {t:"10:45", n:"Palatino y Foro Romano", d:"Incluidos en la misma entrada. Con niños, centraos en el Palatino (más verde y con vistas al Circo Máximo) y bajad al Foro solo lo que os apetezca. Llevad agua y algo de picar.", kids:"En el Foro, buscad el arco de Tito y el lugar donde incineraron a Julio César: todavía hay quien deja flores.", q:"Palatino"},
+      {t:"13:15", n:"Comida en Monti", d:"Barrio con ambiente de pueblo, a 10 minutos del Coliseo.", type:"rest"},
+      {t:"15:00", n:"Descanso", d:"Volver al alojamiento o una plaza tranquila.", type:"rest"},
+      {t:"16:00", n:"Bocca della Verità", d:"Cola corta y foto obligatoria metiendo la mano.", kids:"Cuenta la leyenda que muerde la mano a quien miente: ¡que cada uno diga una verdad!", q:"Bocca della Verità"},
+      {t:"16:30", n:"Giardino degli Aranci y el ojo de la cerradura", d:"Subida suave al Aventino. Atardecer sobre Roma hacia las 16:50 y, a dos pasos, la cerradura de la Orden de Malta, desde la que se ve la cúpula de San Pedro perfectamente enmarcada.", kids:"Mirad por la cerradura de uno en uno sin decir qué se ve hasta que todos hayan mirado.", q:"Giardino degli Aranci"},
+      {t:"18:30", n:"Cena", d:"Testaccio está cerca y es zona de cocina romana de toda la vida.", type:"rest"}
+     ],
+     planb:"Si llueve: el Coliseo se visita igual con chubasquero. Por la tarde, cambiad el Aventino por las Domus Romanas de Palazzo Valentini, una visita multimedia bajo tierra que encanta a los niños (requiere reserva; comprobad horario)."},
+    {id:"d5", tab:"Mar 5", title:"Martes 5: Museos Vaticanos y noche de la Befana", km:"≈ 4 km", level:2,
+     intro:"Opción A, si conseguís entradas (turoperador acreditado o hueco en la web oficial). Con niños de 10 a 13 años, la entrada sola con audioguía funciona bien y no hace falta pagar visita guiada. Id a primera hora y no intentéis verlo todo: unas 3 horas es el máximo razonable.",
+     stops:[
+      {t:"8:00", n:"Museos Vaticanos y Capilla Sixtina", d:"Ruta recomendada: galería de mapas, estancias de Rafael y Capilla Sixtina, más el patio de la Piña. Hay audioguía familiar oficial. Hombros y rodillas cubiertos; en la Sixtina no se pueden hacer fotos.", kids:"En la Sixtina, buscad la mano de Dios casi tocando la de Adán. En la galería de mapas, intentad encontrar dónde vivís.", tags:["Entrada nominativa","Gratis menores de 7"], q:"Musei Vaticani", tk:true},
+      {t:"11:30", n:"Comida en Prati", d:"Barrio cómodo y menos turístico, justo al lado de los museos.", type:"rest"},
+      {t:"13:30", n:"Descanso", d:"Imprescindible después de 3 horas de museo.", type:"rest"},
+      {t:"15:30", n:"Villa Borghese y terraza del Pincio", d:"El gran parque de Roma: espacio para correr, y alquiler de bicis o cuadriciclos si el tiempo acompaña. Atardecer desde el Pincio sobre Piazza del Popolo.", kids:"Una carrera en cuadriciclo familiar por los paseos del parque.", q:"Terrazza del Pincio"},
+      {t:"17:15", n:"Piazza del Popolo, Via del Corso y Plaza de España", d:"Bajada a pie entre luces de Navidad.", q:"Piazza di Spagna"},
+      {t:"19:00", n:"Cena y noche de la Befana", d:"Antes de dormir, los niños cuelgan el calcetín. Según la tradición, la Befana pasa en escoba durante la noche.", type:"rest"}
+     ],
+     planb:"Si llueve: el Vaticano es interior. Por la tarde, cambiad el parque por Castel Sant’Angelo por dentro (abre hasta las 19:30, último acceso a las 18:30)."},
+    {id:"d6", tab:"Mié 6", title:"Miércoles 6: Epifanía y despedida", km:"≈ 2 km", level:1,
+     intro:"Día festivo en Italia: el Vaticano cierra y muchas tiendas también. A cambio, Roma celebra la Befana a lo grande. Mañana tranquila antes de salir.",
+     stops:[
+      {t:"9:00", n:"Desayuno y abrir los calcetines", d:"El momento estrella para los niños.", type:"rest"},
+      {t:"10:00", n:"Corteo «Viva la Befana»", d:"Desfile tradicional y gratuito por Via della Conciliazione hasta la plaza de San Pedro: Reyes Magos a caballo, trajes de época y bandas. Se celebra cada año desde hace décadas; confirmad el programa de 2027 en diciembre.", kids:"Ver a los Reyes Magos llegando a caballo hasta San Pedro.", tags:["Gratis"], q:"Via della Conciliazione"},
+      {t:"12:00", n:"Ángelus de la Epifanía (opcional)", d:"Si os pilla en la plaza, quedaos. Si preferís evitar multitudes, id a Piazza Navona para el último día del mercadillo.", q:"Piazza Navona"},
+      {t:"13:00", n:"Comida y salida", d:"Dejad margen para el traslado: un festivo con mucho público en el centro.", type:"rest"}
+     ],
+     planb:"Si llueve o no os apetece el gentío: desayuno largo, último paseo por Piazza Navona y salida con calma. Si no conseguisteis Coliseo el lunes, esta mañana es vuestro plan B."}
+  ];
+
+  const d5b = {
+    title:"Martes 5: Castel Sant’Angelo y noche de la Befana", km:"≈ 4 km", level:2,
+    intro:"Opción B, si no conseguís el Vaticano a buen precio. Un castillo de verdad, con rampas secretas, cañones, celdas y la mejor terraza sobre San Pedro. A niños de 10 a 13 años suele gustarles más que un museo de pintura.",
+    stops:[
+      {t:"9:00", n:"Castel Sant’Angelo", d:"Abre a las 9:00 (último acceso a las 18:30). Calculad unas 2 horas: la rampa en espiral del mausoleo de Adriano, los apartamentos de los papas, las celdas, la armería y, arriba del todo, la terraza del ángel con vistas a San Pedro y a toda Roma.", kids:"Buscad el «Passetto», el pasadizo elevado por el que los papas huían del Vaticano al castillo, y contad los cañones de las murallas. A veces hay visitas guiadas al Passetto con suplemento: preguntad en taquilla.", tags:["Adultos 18 €","Menores de 18 gratis","Reserva opcional"], q:"Castel Sant'Angelo", tk:true},
+      {t:"11:15", n:"Café con vistas y Puente de Sant’Angelo", d:"El castillo tiene cafetería arriba. Al salir, cruzad el puente de los ángeles de Bernini.", type:"rest"},
+      {t:"12:15", n:"Comida en Prati o Borgo", d:"A 5–10 minutos andando.", type:"rest"},
+      {t:"13:45", n:"Descanso", d:"Volver al alojamiento a recargar pilas.", type:"rest"},
+      {t:"15:30", n:"Villa Borghese y terraza del Pincio", d:"El gran parque de Roma: espacio para correr, y alquiler de bicis o cuadriciclos si el tiempo acompaña. Atardecer desde el Pincio sobre Piazza del Popolo.", kids:"Una carrera en cuadriciclo familiar por los paseos del parque.", q:"Terrazza del Pincio"},
+      {t:"17:15", n:"Piazza del Popolo, Via del Corso y Plaza de España", d:"Bajada a pie entre luces de Navidad.", q:"Piazza di Spagna"},
+      {t:"19:00", n:"Cena y noche de la Befana", d:"Antes de dormir, los niños cuelgan el calcetín. Según la tradición, la Befana pasa en escoba durante la noche.", type:"rest"}
+    ],
+    planb:"Si llueve: el castillo es casi todo interior; dejad la terraza para un claro. Por la tarde, cambiad el parque por las Domus Romanas de Palazzo Valentini (requiere reserva; comprobad horario) o por compras de la Befana en Via del Corso."
+  };
+  let opt = store.get("roma27-opt", "vat");
+  const tabsEl = document.getElementById("tabs");
+  const panelEl = document.getElementById("dayPanel");
+  days.forEach(d => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.type = "button"; b.setAttribute("role","tab"); b.id = "tab-" + d.id;
+    b.setAttribute("aria-controls", "dayPanel"); b.textContent = d.tab;
+    b.addEventListener("click", () => selectDay(d.id));
+    tabsEl.appendChild(b);
+  });
+  tabsEl.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const i = days.findIndex(d => d.id === current);
+    const n = (i + (e.key === "ArrowRight" ? 1 : -1) + days.length) % days.length;
+    selectDay(days[n].id); document.getElementById("tab-" + days[n].id).focus();
+  });
+
+  let current = store.get("roma27-day", "d2");
+  function selectDay(id){
+    let d = days.find(x => x.id === id) || days[0];
+    current = d.id; store.set("roma27-day", current);
+    const isTue = d.id === "d5";
+    if (isTue && opt === "csa") d = Object.assign({}, d, d5b);
+    tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.id === "tab-" + d.id ? "true" : "false"));
+    panelEl.setAttribute("role", "tabpanel"); panelEl.setAttribute("aria-labelledby", "tab-" + d.id);
+    const dots = [1,2,3].map(i => '<b class="' + (i <= d.level ? "on" : "") + '"></b>').join("");
+    panelEl.innerHTML =
+      '<div class="day">' +
+      (isTue ? '<div class="opt" role="group" aria-label="Elegir plan del martes"><button type="button" data-opt="vat" aria-pressed="' + (opt === "vat") + '">Opción A: Museos Vaticanos</button><button type="button" data-opt="csa" aria-pressed="' + (opt === "csa") + '">Opción B: Castel Sant’Angelo</button></div>' : '') +
+      '<div class="day-head"><h3>' + d.title + '</h3>' +
+      '<div class="meter"><span>Caminata ' + d.km + '</span><span>Intensidad <span class="dots" aria-label="' + d.level + ' de 3">' + dots + '</span></span></div></div>' +
+      '<p class="day-intro">' + d.intro + '</p>' +
+      '<ol class="timeline">' + d.stops.map(s =>
+        '<li class="stop' + (s.tk ? " ticket" : "") + (s.type === "rest" ? " rest" : "") + '">' +
+          '<span class="t">' + s.t + '</span><span class="dot" aria-hidden="true"></span>' +
+          '<div class="body"><h4>' + s.n + '</h4><p>' + s.d + '</p>' +
+          (s.kids ? '<span class="kids">Para los niños: ' + s.kids + '</span>' : '') +
+          ((s.tags || s.q) ? '<div class="tags">' + (s.tags || []).map(t => '<span class="tag' + (s.tk ? " tk" : "") + '">' + t + '</span>').join("") +
+            (s.q ? '<a class="tag" href="' + maps(s.q) + '" target="_blank" rel="noopener">Ver en el mapa</a>' : '') + '</div>' : '') +
+          '</div></li>').join("") + '</ol>' +
+      '<div class="planb"><strong>Plan B.</strong> ' + d.planb + '</div></div>';
+  }
+  panelEl.addEventListener("click", e => {
+    const b = e.target.closest("[data-opt]");
+    if (!b) return;
+    opt = b.dataset.opt; store.set("roma27-opt", opt);
+    selectDay("d5"); renderCost();
+    const f = panelEl.querySelector('[data-opt="' + opt + '"]'); if (f) f.focus();
+  });
+  selectDay(current);
+
+  /* ---------- Calculator ---------- */
+  const agesEl = document.getElementById("ages");
+  let ages = store.get("roma27-ages2", [10, 12, 13, 13]);
+  ages.forEach((a, i) => {
+    const l = document.createElement("label");
+    l.innerHTML = "Niño " + (i+1) + '<select data-i="' + i + '">' + Array.from({length:18}, (_, n) => '<option value="' + n + '"' + (n === a ? " selected" : "") + '>' + n + (n === 1 ? " año" : " años") + '</option>').join("") + '</select>';
+    agesEl.appendChild(l);
+  });
+  agesEl.addEventListener("change", e => {
+    if (!e.target.matches("select")) return;
+    ages[+e.target.dataset.i] = +e.target.value; store.set("roma27-ages2", ages); renderCost();
+  });
+  const eur = n => n.toLocaleString("es-ES", {style:"currency", currency:"EUR", maximumFractionDigits:0});
+  function renderCost(){
+    const A = 4;
+    const rows = [
+      opt === "csa"
+        ? ["Castel Sant’Angelo (opción B)", A*18, 0]
+        : ["Museos Vaticanos (opción A, precio oficial)", A*25, ages.reduce((s, a) => s + (a < 7 ? 0 : 15), 0)],
+      ["Coliseo, Foro y Palatino", A*18, 0],
+      ["Panteón", A*7, 0],
+      ["Fontana di Trevi", A*2, ages.reduce((s, a) => s + (a < 6 ? 0 : 2), 0)]
+    ];
+    let ta = 0, tk = 0;
+    const body = rows.map(r => { ta += r[1]; tk += r[2]; return '<tr><td>' + r[0] + '</td><td class="num">' + eur(r[1]) + '</td><td class="num">' + eur(r[2]) + '</td><td class="num">' + eur(r[1] + r[2]) + '</td></tr>'; }).join("");
+    document.getElementById("costTable").innerHTML =
+      '<thead><tr><th>Sitio</th><th class="num">4 adultos</th><th class="num">4 niños</th><th class="num">Total</th></tr></thead><tbody>' + body +
+      '<tr class="total"><td>Total</td><td class="num">' + eur(ta) + '</td><td class="num">' + eur(tk) + '</td><td class="num">' + eur(ta + tk) + '</td></tr>' +
+      (opt === "vat" ? '<tr><td colspan="4" class="small">Si el Vaticano es por turoperador con entrada sola (orientativo: 39 € adulto, 25 € niño), sumad unos ' + eur(A*39 + ages.reduce((s, a) => s + (a < 6 ? 0 : 25), 0) - rows[0][1] - rows[0][2]) + ' más.</td></tr>' : '') +
+      '</tbody>';
+  }
+  renderCost();
+
+  /* ---------- Checklist ---------- */
+  const items = [
+    "DNI o pasaporte de los 8, también de los niños: Vaticano y Coliseo comprueban nombres",
+    "Nombres completos de todos apuntados tal cual aparecen en el documento",
+    "Entradas descargadas en el móvil y en PDF por si falla la conexión",
+    "Ropa que cubra hombros y rodillas para San Pedro y el Vaticano",
+    "Tarjeta bancaria a mano: Trevi solo acepta tarjeta",
+    "Calzado cómodo y probado: el empedrado romano cansa mucho",
+    "Botella rellenable: las fuentes públicas («nasoni») tienen agua potable",
+    "Chubasquero ligero o paraguas plegable: enero puede ser lluvioso",
+    "Mochila portabebés si hay algún peque: los adoquines y los carritos no se llevan bien",
+    "Un punto de encuentro acordado por si alguien se separa en las multitudes",
+    "Calcetín de la Befana comprado en Piazza Navona el día 2",
+    "Revisar la semana antes los horarios de fiestas en las webs oficiales"
+  ];
+  const checks = store.get("roma27-checks", {});
+  const clEl = document.getElementById("checklist");
+  items.forEach((t, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = '<label><input type="checkbox" data-i="' + i + '"' + (checks[i] ? " checked" : "") + '><span>' + t + '</span></label>';
+    clEl.appendChild(li);
+  });
+  clEl.addEventListener("change", e => { checks[e.target.dataset.i] = e.target.checked; store.set("roma27-checks", checks); });
+})();
+</script>
+</body>
+</html>
