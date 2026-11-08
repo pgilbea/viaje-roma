@@ -131,6 +131,20 @@ a.tag{color:var(--sky)}
 .opt button{font:inherit;font-size:.9rem;font-weight:600;border:0;background:transparent;color:var(--ink-soft);padding:8px 12px;border-radius:9px;cursor:pointer}
 .opt button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
 
+.controls{display:flex;flex-wrap:wrap;gap:12px 18px;margin:16px 0 0;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.controls label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--ink-soft);flex:1 1 200px}
+.controls select,.controls input{font:inherit;font-size:1rem;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);width:100%}
+.controls p{flex-basis:100%;margin:0;font-size:.85rem;color:var(--ink-soft)}
+.acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.act{display:inline-flex;align-items:center;font-size:.8rem;font-weight:600;line-height:1.2;padding:7px 11px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none}
+.act:hover{border-color:var(--ink-soft)}
+.act.go{background:var(--sky);border-color:var(--sky);color:var(--surface)}
+.act.eat{background:var(--ochre-bg);border-color:transparent;color:var(--ink)}
+.act[hidden]{display:none}
+.fab{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;justify-content:center;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.fab .act{font-size:.9rem;padding:9px 14px}
+body{padding-bottom:70px}
+
 /* Calculator */
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px}
 .ages{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
@@ -217,6 +231,11 @@ footer ul{padding-left:1.1em}
 <section id="plan" aria-labelledby="h-plan">
   <h2 id="h-plan">Plan día a día</h2>
   <p class="lede">Pensado para ir a ritmo de niños: una visita grande por la mañana, comida sin prisas y tarde tranquila. He supuesto que llegáis el día 2 hacia mediodía y os vais el 6 después de comer; si es al revés, me dices y lo reordeno.</p>
+  <div class="controls">
+    <label>Qué buscar para comer<select id="foodSel"></select></label>
+    <label>Dirección del alojamiento<input id="homeIn" type="text" placeholder="Ej.: Via dei Coronari 10" autocomplete="street-address"></label>
+    <p>Los botones abren Google Maps. «Cómo llegar» calcula la ruta desde donde estéis en ese momento y muestra primero la opción más rápida en transporte público; en trayectos cortos, comparad con la opción a pie. «Cerca» busca alrededor de cada parada. La dirección del alojamiento solo se guarda en este navegador.</p>
+  </div>
   <div class="tabs" role="tablist" id="tabs" aria-label="Días"></div>
   <div id="dayPanel"></div>
 </section>
@@ -237,6 +256,11 @@ footer ul{padding-left:1.1em}
 </section>
 
 </main>
+
+<nav class="fab" aria-label="Accesos rápidos">
+  <a class="act eat" id="eatMe" href="#" target="_blank" rel="noopener">Comer cerca de mí</a>
+  <a class="act go" id="homeBtn" href="#" target="_blank" rel="noopener" hidden>Volver al alojamiento</a>
+</nav>
 
 <footer class="wrap">
   <p>Fechas y precios verificados el 8 de noviembre de 2026 en las webs oficiales y prensa italiana. Los cierres de enero de 2027 y el programa de la Befana pueden cambiar: revisad las webs oficiales la semana antes.</p>
@@ -427,6 +451,46 @@ footer ul{padding-left:1.1em}
     planb:"Si llueve: el castillo es casi todo interior; dejad la terraza para un claro. Por la tarde, cambiad el parque por las Domus Romanas de Palazzo Valentini (requiere reserva; comprobad horario) o por compras de la Befana en Via del Corso."
   };
   let opt = store.get("roma27-opt", "vat");
+  /* ---------- Google Maps: comer y cómo llegar ---------- */
+  const nearBy = {
+    "Helado y paseo hacia Trevi":"Pantheon", "Cena temprana":"Fontana di Trevi",
+    "Descanso y almuerzo temprano por Borgo":"Borgo Pio", "Cena en Trastevere":"Piazza di Santa Maria in Trastevere",
+    "Comida en Monti":"Piazza della Madonna dei Monti", "Cena":"Testaccio",
+    "Comida en Prati":"Via Cola di Rienzo", "Cena y noche de la Befana":"Piazza di Spagna",
+    "Café con vistas y Puente de Sant’Angelo":"Ponte Sant'Angelo", "Comida en Prati o Borgo":"Borgo Pio",
+    "Comida y salida":"Piazza Navona"
+  };
+  const foods = [["restaurantes","Restaurantes"],["pizzería","Pizzerías"],["trattoria","Trattorias"],["heladería","Heladerías"],["cafetería","Cafeterías"]];
+  let food = store.get("roma27-food", "restaurantes");
+  let home = store.get("roma27-home", "");
+  const enc = encodeURIComponent;
+  const foodLabel = () => (foods.find(f => f[0] === food) || foods[0])[1];
+  const withRoma = t => t + (/roma|rome/i.test(t) ? "" : ", Roma");
+  const dirUrl = dest => "https://www.google.com/maps/dir/?api=1&destination=" + enc(withRoma(dest)) + "&travelmode=transit";
+  const eatUrl = loc => "https://www.google.com/maps/search/?api=1&query=" + enc(loc ? food + " cerca de " + withRoma(loc) : food);
+  function acts(s){
+    const loc = s.q || nearBy[s.n];
+    if (!loc) return "";
+    return '<div class="acts">' +
+      (s.q ? '<a class="act" href="' + maps(s.q) + '" target="_blank" rel="noopener">Ver en el mapa</a>' : '') +
+      '<a class="act go" href="' + dirUrl(loc) + '" target="_blank" rel="noopener">Cómo llegar en transporte público</a>' +
+      '<a class="act eat" href="' + eatUrl(loc) + '" target="_blank" rel="noopener">' + foodLabel() + ' cerca</a>' +
+      '</div>';
+  }
+  const foodSel = document.getElementById("foodSel");
+  foodSel.innerHTML = foods.map(f => '<option value="' + f[0] + '"' + (f[0] === food ? " selected" : "") + '>' + f[1] + '</option>').join("");
+  const homeIn = document.getElementById("homeIn");
+  homeIn.value = home;
+  function updateBar(){
+    const em = document.getElementById("eatMe");
+    em.href = eatUrl(""); em.textContent = foodLabel() + " cerca de mí";
+    const hb = document.getElementById("homeBtn");
+    if (home) { hb.hidden = false; hb.href = dirUrl(home); } else { hb.hidden = true; }
+  }
+  foodSel.addEventListener("change", () => { food = foodSel.value; store.set("roma27-food", food); updateBar(); selectDay(current); });
+  homeIn.addEventListener("change", () => { home = homeIn.value.trim(); store.set("roma27-home", home); updateBar(); });
+  updateBar();
+
   const tabsEl = document.getElementById("tabs");
   const panelEl = document.getElementById("dayPanel");
   days.forEach(d => {
@@ -463,8 +527,8 @@ footer ul{padding-left:1.1em}
           '<span class="t">' + s.t + '</span><span class="dot" aria-hidden="true"></span>' +
           '<div class="body"><h4>' + s.n + '</h4><p>' + s.d + '</p>' +
           (s.kids ? '<span class="kids">Para los niños: ' + s.kids + '</span>' : '') +
-          ((s.tags || s.q) ? '<div class="tags">' + (s.tags || []).map(t => '<span class="tag' + (s.tk ? " tk" : "") + '">' + t + '</span>').join("") +
-            (s.q ? '<a class="tag" href="' + maps(s.q) + '" target="_blank" rel="noopener">Ver en el mapa</a>' : '') + '</div>' : '') +
+          (s.tags ? '<div class="tags">' + s.tags.map(t => '<span class="tag' + (s.tk ? " tk" : "") + '">' + t + '</span>').join("") + '</div>' : '') +
+          acts(s) +
           '</div></li>').join("") + '</ol>' +
       '<div class="planb"><strong>Plan B.</strong> ' + d.planb + '</div></div>';
   }
