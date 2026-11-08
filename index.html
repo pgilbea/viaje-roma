@@ -145,6 +145,12 @@ a.tag{color:var(--sky)}
 .fab .act{font-size:.9rem;padding:9px 14px}
 body{padding-bottom:70px}
 
+.leg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px 0;margin-top:16px}
+.leg h3{margin-bottom:4px}
+.leg ol.timeline{margin-top:14px}
+.controls p.rec{color:var(--ink);background:var(--pine-bg);padding:10px 12px;border-radius:10px;font-size:.95rem}
+h3.sub{margin-top:28px}
+
 /* Calculator */
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px}
 .ages{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
@@ -214,6 +220,7 @@ footer ul{padding-left:1.1em}
 <nav class="jump" aria-label="Secciones">
   <div class="wrap">
     <a href="#alertas">Alertas de compra</a>
+    <a href="#viaje">Desplazamientos</a>
     <a href="#plan">Plan día a día</a>
     <a href="#coste">Calculadora</a>
     <a href="#lista">Antes de ir</a>
@@ -228,9 +235,58 @@ footer ul{padding-left:1.1em}
   <ul class="alerts" id="alerts"></ul>
 </section>
 
+<section id="viaje" aria-labelledby="h-viaje">
+  <h2 id="h-viaje">Desplazamientos</h2>
+  <p class="lede">Vuelos de Vueling con escala en Barcelona. Cada sentido va en un mismo billete: si facturáis, el equipaje va directo y en El Prat solo hay que cambiar de puerta, sin control de pasaportes.</p>
+
+  <div class="leg">
+    <h3>Ida: sábado 2 de enero</h3>
+    <ol class="timeline">
+      <li class="stop"><span class="t">4:30</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Salida de casa en coche</h4><p>Calculad el trayecto real con el botón. Desde Donostia, por ejemplo, es alrededor de 1 hora y cuarto. Si sois 8, seguramente vayáis en dos coches.</p><div class="acts"><a class="act go" href="https://www.google.com/maps/dir/?api=1&amp;destination=Parking%20Larga%20Estancia%20P2%20Aeropuerto%20de%20Bilbao&amp;travelmode=driving" target="_blank" rel="noopener">Ruta en coche al parking P2</a></div></div></li>
+      <li class="stop ticket"><span class="t">5:45</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Parking P2 Larga Estancia del aeropuerto de Bilbao</h4><p>Es el parking oficial de Aena para estancias largas. Solo se entra con reserva previa y reservar con antelación sale más barato. Una pasarela cubierta lleva a la terminal en unos 5 minutos.</p><div class="tags"><span class="tag tk">Reserva obligatoria</span><span class="tag tk">Una reserva por coche</span></div><div class="acts"><a class="act" href="https://www.aena.es/es/bilbao/parking/nt/larga-estancia.html" target="_blank" rel="noopener">Reservar en Aena (web oficial)</a></div></div></li>
+      <li class="stop"><span class="t">7:00</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Bilbao → Barcelona (VY1463)</h4><p>Llegada a las 8:10. Conexión de 1 h 05 min en El Prat.</p></div></li>
+      <li class="stop"><span class="t">9:15</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Barcelona → Roma Fiumicino (VY6002)</h4><p>Llegada a las 11:05.</p></div></li>
+      <li class="stop"><span class="t">11:30</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Del aeropuerto al centro</h4><p>Opciones y recomendación justo abajo. Llegada al alojamiento hacia las 12:30.</p><div class="acts"><a class="act go" id="fcoIn" href="#" target="_blank" rel="noopener">Ruta del aeropuerto al alojamiento</a></div></div></li>
+    </ol>
+  </div>
+
+  <div class="leg">
+    <h3>Vuelta: miércoles 6 de enero</h3>
+    <ol class="timeline">
+      <li class="stop ticket"><span class="t">9:30</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Salida del alojamiento hacia Fiumicino</h4><p>Es festivo en Italia. Mejor dos taxis reservados por app la víspera o una furgoneta de 8 plazas reservada con antelación, para no depender de encontrar coche en la calle.</p><div class="acts"><a class="act go" id="fcoOut" href="#" target="_blank" rel="noopener">Ruta al aeropuerto</a></div></div></li>
+      <li class="stop"><span class="t">10:15</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Fiumicino: facturación y control</h4><p>Unas 2 horas antes del vuelo, con margen para 8 personas.</p></div></li>
+      <li class="stop"><span class="t">12:35</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Roma → Barcelona (VY6007)</h4><p>Llegada a las 14:25. Conexión de 1 h 40 min: tiempo para comer algo en El Prat.</p></div></li>
+      <li class="stop"><span class="t">16:05</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Barcelona → Bilbao (VY1464)</h4><p>Llegada a las 17:20.</p></div></li>
+      <li class="stop rest"><span class="t">17:45</span><span class="dot" aria-hidden="true"></span><div class="body"><h4>Recoger el coche en el P2</h4><p>Desde llegadas, subid en ascensor a la planta +3 (Salidas) y seguid las indicaciones al Parking de Larga Estancia P2.</p></div></li>
+    </ol>
+  </div>
+
+  <h3 class="sub">Del aeropuerto de Roma al centro</h3>
+  <div class="controls">
+    <label>¿Dónde está el alojamiento?<select id="zoneSel">
+      <option value="centro">Centro histórico (Navona, Panteón, Trevi)</option>
+      <option value="termini">Cerca de Termini o Monti</option>
+      <option value="trastevere">Trastevere</option>
+      <option value="vaticano">Vaticano o Prati</option>
+    </select></label>
+    <p class="rec" id="zoneRec" aria-live="polite"></p>
+  </div>
+  <div class="tablewrap" style="margin-top:14px"><table>
+    <thead><tr><th>Opción</th><th class="num">Coste para los 8</th><th>Tiempo</th><th>Cuándo conviene</th></tr></thead>
+    <tbody>
+      <tr><td>2 taxis oficiales (blancos)</td><td class="num">110 €</td><td>45–60 min, puerta a puerta</td><td>Tarifa fija de 55 € por coche hasta cualquier punto dentro de las murallas, con maletas y suplementos incluidos. Máximo 4 personas por coche.</td></tr>
+      <tr><td>Leonardo Express a Termini</td><td class="num">≈ 80 €</td><td>32 min + último tramo</td><td>Alojamiento cerca de Termini. Cuatro billetes juntos («Minigruppo») cuestan 40 € en vez de 56 €.</td></tr>
+      <tr><td>Tren regional FL1</td><td class="num">hasta 64 €</td><td>≈ 30 min a Trastevere</td><td>Alojamiento en Trastevere u Ostiense. No para en Termini.</td></tr>
+      <tr><td>Furgoneta privada de 8 plazas</td><td class="num">Según presupuesto</td><td>Puerta a puerta</td><td>Os esperan con cartel y vais todos juntos. Merece la pena si cuesta parecido a dos taxis, sobre todo para la vuelta.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">En Fiumicino, coged solo los taxis blancos de la parada oficial. La tarifa fija es por coche, no por persona. Precios de 2026 según Aeroporti di Roma y Trenitalia.</p>
+  <div class="acts"><a class="act" href="https://www.adr.it/pax-fco-taxi" target="_blank" rel="noopener">Taxis en Fiumicino (oficial)</a><a class="act" href="https://www.trenitalia.com/it/treni_regionali/lazio/leonardo_express.html" target="_blank" rel="noopener">Leonardo Express (Trenitalia)</a></div>
+</section>
+
 <section id="plan" aria-labelledby="h-plan">
   <h2 id="h-plan">Plan día a día</h2>
-  <p class="lede">Pensado para ir a ritmo de niños: una visita grande por la mañana, comida sin prisas y tarde tranquila. He supuesto que llegáis el día 2 hacia mediodía y os vais el 6 después de comer; si es al revés, me dices y lo reordeno.</p>
+  <p class="lede">Pensado para ir a ritmo de niños: una visita grande por la mañana, comida sin prisas y tarde tranquila. Ajustado a vuestros vuelos: aterrizáis el sábado 2 a las 11:05 y el miércoles 6 el avión sale a las 12:35.</p>
   <div class="controls">
     <label>Qué buscar para comer<select id="foodSel"></select></label>
     <label>Dirección del alojamiento<input id="homeIn" type="text" placeholder="Ej.: Via dei Coronari 10" autocomplete="street-address"></label>
@@ -282,11 +338,11 @@ footer ul{padding-left:1.1em}
 
   /* ---------- Week strip ---------- */
   const week = [
-    {id:"d2", name:"Sáb", num:2, half:"Llegada", pills:[["Vaticano abierto","p-open"],["Coliseo abierto","p-open"],["Centro histórico","p-plan"]]},
+    {id:"d2", name:"Sáb", num:2, half:"Aterrizaje 11:05", pills:[["Vaticano abierto","p-open"],["Coliseo abierto","p-open"],["Centro histórico","p-plan"]]},
     {id:"d3", name:"Dom", num:3, half:"Día entero", pills:[["Vaticano cerrado","p-closed"],["Coliseo gratis, colas","p-warn"],["San Pedro y Ángelus","p-plan"]]},
     {id:"d4", name:"Lun", num:4, half:"Día entero", pills:[["Vaticano, muy lleno","p-warn"],["Coliseo","p-plan"]]},
     {id:"d5", name:"Mar", num:5, half:"Día entero", pills:[["Vaticano o Castel Sant’Angelo","p-plan"],["Coliseo abierto","p-open"]]},
-    {id:"d6", name:"Mié", num:6, half:"Salida", pills:[["Vaticano cerrado","p-closed"],["Coliseo abierto","p-open"],["Befana","p-plan"]]}
+    {id:"d6", name:"Mié", num:6, half:"Vuelo 12:35", pills:[["Mañana de viaje","p-warn"],["Calcetines de la Befana","p-plan"]]}
   ];
   const weekEl = document.getElementById("week");
   week.forEach(d => {
@@ -303,14 +359,17 @@ footer ul{padding-left:1.1em}
   // Fechas en hora de Roma (CET = UTC+1 en nov–ene)
   const rome = (y,m,d,h=0,mi=0) => new Date(Date.UTC(y,m-1,d,h-1,mi));
   const alerts = [
+    {id:"park", what:"Parking P2 Larga Estancia del aeropuerto de Bilbao", when:"Del sábado 2 (5:30) al miércoles 6 (18:00)", release:null, kind:"buy",
+      note:"Solo se entra con reserva previa, y reservar pronto sale más barato. La reserva va asociada a la matrícula: si vais en dos coches, haced dos reservas.",
+      link:"https://www.aena.es/es/bilbao/parking/nt/larga-estancia.html", linkText:"Reservar en Aena"},
     {id:"vat", what:"Museos Vaticanos: entradas oficiales agotadas", when:"Buscar huecos liberados, visitas guiadas oficiales o turoperador acreditado", release:rome(2026,11,6), kind:"buy",
       note:"Revisad la web oficial cada pocos días, mejor a primera hora, buscando el 2, 4 o 5 de enero. Mirad también las visitas guiadas oficiales y los Jardines en autobús, que tienen cupo aparte. Si al final vais con turoperador, comprobad que esté en la lista oficial de acreditados.",
       link:"https://tickets.museivaticani.va", linkText:"Abrir web oficial"},
     {id:"col", what:"Coliseo + Foro + Palatino para el lunes 4", when:"Salen el sábado 5 de diciembre a las 00:00", release:rome(2026,12,5), kind:"buy",
       note:"Entrada «24h» de 18 €. Los 4 niños también necesitan su entrada gratuita y nominativa. Ten preparados los 8 nombres y entra a las 23:55 del día 4. Las franjas de primera hora vuelan en minutos.",
       link:"https://ticketing.colosseo.it", linkText:"Abrir web oficial", cal:true},
-    {id:"colb", what:"Plan B del Coliseo: martes 5 o miércoles 6", when:"Salen el 6 y el 7 de diciembre a las 00:00", release:rome(2026,12,6), kind:"backup",
-      note:"Solo si el día 5 de diciembre no conseguís el lunes. El miércoles 6 el Coliseo abre con horario normal y podríais ir antes de la salida.",
+    {id:"colb", what:"Plan B del Coliseo: martes 5", when:"Salen el domingo 6 de diciembre a las 00:00", release:rome(2026,12,6), kind:"backup",
+      note:"Solo si el día 5 de diciembre no conseguís el lunes; en ese caso intercambiad el plan del lunes y el del martes. El miércoles 6 ya no es opción, porque el vuelo sale a las 12:35.",
       link:"https://ticketing.colosseo.it", linkText:"Abrir web oficial", cal:true},
     {id:"pan", what:"Panteón para el sábado 2 por la tarde", when:"Reserva opcional, recomendable en fin de semana", release:null, kind:"optional",
       note:"7 € adultos, niños gratis pero con plaza reservada. Si al mirar aún no aparece el 2 de enero, vuelve a probar a principios de diciembre.",
@@ -318,6 +377,9 @@ footer ul{padding-left:1.1em}
     {id:"csa", what:"Castel Sant’Angelo para el martes 5 (opción B)", when:"Reserva opcional; rara vez se agota", release:null, kind:"optional",
       note:"Adultos 18 €, menores de 18 gratis. Solo si descartáis el Vaticano. Truco: el domingo 3 es gratis para todos por ser primer domingo de mes; si al pasar por delante veis poca cola, entrad ese día y os ahorráis 72 €.",
       link:"https://cultura.gov.it/luogo/castel-santangelo", linkText:"Ver información"},
+    {id:"back", what:"Traslado al aeropuerto el miércoles 6 a las 9:30", when:"Reservar unos días antes; es festivo en Italia", release:null, kind:"optional",
+      note:"Una furgoneta de 8 plazas o dos taxis por app. A la ida no hace falta reservar: hay parada oficial de taxis en Fiumicino.",
+      link:"https://www.adr.it/pax-fco-taxi", linkText:"Taxis en Fiumicino"},
     {id:"free", what:"Sin reserva: Trevi, Basílica de San Pedro, Ángelus y corteo de la Befana", when:"Se paga o se entra en el momento", release:null, kind:"free",
       note:"Trevi: 2 € por persona en el torniquete, solo tarjeta. San Pedro: entrada gratis con control de seguridad; la subida a la cúpula se paga allí."}
   ];
@@ -327,7 +389,7 @@ footer ul{padding-left:1.1em}
   function calLink(a){
     const ev = a.id === "col"
       ? {t:"Comprar Coliseo (lunes 4 enero)", s:"20261204T235000", e:"20261205T003000"}
-      : {t:"Plan B Coliseo (5 o 6 enero)", s:"20261205T235000", e:"20261206T003000"};
+      : {t:"Plan B Coliseo (martes 5 enero)", s:"20261205T235000", e:"20261206T003000"};
     const p = new URLSearchParams({action:"TEMPLATE", text:ev.t, dates:ev.s + "/" + ev.e, ctz:"Europe/Rome", details:"Entradas nominativas: ten los 8 nombres a mano. https://ticketing.colosseo.it"});
     return "https://calendar.google.com/calendar/render?" + p.toString();
   }
@@ -353,6 +415,7 @@ footer ul{padding-left:1.1em}
       else if (a.kind === "optional") badge = '<span class="badge b-soon">Opcional</span>';
       else if (a.release && now >= a.release) badge = '<span class="badge b-now">Ya a la venta</span>';
       else if (a.release) badge = '<span class="badge b-soon live">' + fmtLeft(a.release - now) + '</span>';
+      else if (a.kind === "buy") badge = '<span class="badge b-now">Reservar ya</span>';
       if (a.kind === "buy" && !isDone) pending++;
       li.innerHTML =
         '<div><div class="what">' + a.what + '</div><div class="when">' + a.when + '</div></div>' +
@@ -381,7 +444,8 @@ footer ul{padding-left:1.1em}
     {id:"d2", tab:"Sáb 2", title:"Sábado 2: primer paseo por el centro", km:"≈ 3 km", level:1,
      intro:"Tarde corta y sin estrés: todo está a 5–10 minutos andando y no hay horarios estrictos salvo el Panteón. Es el día perfecto para que los niños se enamoren de Roma.",
      stops:[
-      {t:"12:00", n:"Llegada y dejar maletas", d:"Comida ligera cerca del alojamiento.", type:"rest"},
+      {t:"11:05", n:"Aterrizaje en Fiumicino", d:"Traslado al centro: mirad la sección de desplazamientos.", type:"rest"},
+      {t:"12:30", n:"Llegada al alojamiento y comida", d:"Dejad las maletas (casi todos los alojamientos las guardan si el check-in es más tarde) y comida ligera cerca.", type:"rest"},
       {t:"15:00", n:"Panteón", d:"20–30 minutos dentro. La cúpula con el agujero en el techo impresiona a cualquier edad.", kids:"Reto: buscad el agujero del techo y preguntad por dónde se va el agua cuando llueve (hay desagües en el suelo).", tags:["Reserva recomendada"], q:"Pantheon", tk:true},
       {t:"15:45", n:"Piazza Navona y el mercadillo de la Befana", d:"Puestos de dulces, tiovivo y las fuentes de Bernini. Es el sitio para comprar el calcetín de la Befana para la noche del 5.", kids:"Que cada niño elija su «calza della Befana»: se cuelga la noche del 5 y aparece llena de dulces (o de carbón de azúcar).", q:"Piazza Navona"},
       {t:"16:45", n:"Helado y paseo hacia Trevi", d:"Unos 12 minutos andando por calles peatonales.", type:"rest"},
@@ -425,15 +489,15 @@ footer ul{padding-left:1.1em}
       {t:"19:00", n:"Cena y noche de la Befana", d:"Antes de dormir, los niños cuelgan el calcetín. Según la tradición, la Befana pasa en escoba durante la noche.", type:"rest"}
      ],
      planb:"Si llueve: el Vaticano es interior. Por la tarde, cambiad el parque por Castel Sant’Angelo por dentro (abre hasta las 19:30, último acceso a las 18:30)."},
-    {id:"d6", tab:"Mié 6", title:"Miércoles 6: Epifanía y despedida", km:"≈ 2 km", level:1,
-     intro:"Día festivo en Italia: el Vaticano cierra y muchas tiendas también. A cambio, Roma celebra la Befana a lo grande. Mañana tranquila antes de salir.",
+    {id:"d6", tab:"Mié 6", title:"Miércoles 6: la Befana y vuelta a casa", km:"≈ 0,5 km", level:1,
+     intro:"El vuelo sale a las 12:35, así que la mañana es para desayunar con calma, abrir los calcetines y salir hacia el aeropuerto. El desfile de la Befana empieza a las 10:00 y no da tiempo, pero los niños ya habrán vivido la fiesta en el mercadillo de Navona y con sus calcetines.",
      stops:[
-      {t:"9:00", n:"Desayuno y abrir los calcetines", d:"El momento estrella para los niños.", type:"rest"},
-      {t:"10:00", n:"Corteo «Viva la Befana»", d:"Desfile tradicional y gratuito por Via della Conciliazione hasta la plaza de San Pedro: Reyes Magos a caballo, trajes de época y bandas. Se celebra cada año desde hace décadas; confirmad el programa de 2027 en diciembre.", kids:"Ver a los Reyes Magos llegando a caballo hasta San Pedro.", tags:["Gratis"], q:"Via della Conciliazione"},
-      {t:"12:00", n:"Ángelus de la Epifanía (opcional)", d:"Si os pilla en la plaza, quedaos. Si preferís evitar multitudes, id a Piazza Navona para el último día del mercadillo.", q:"Piazza Navona"},
-      {t:"13:00", n:"Comida y salida", d:"Dejad margen para el traslado: un festivo con mucho público en el centro.", type:"rest"}
+      {t:"7:45", n:"Abrir los calcetines de la Befana", d:"El momento estrella para los niños, antes de desayunar.", type:"rest"},
+      {t:"8:15", n:"Desayuno y maletas", d:"Dejad todo listo antes de las 9:15.", type:"rest"},
+      {t:"9:30", n:"Salida hacia Fiumicino", d:"Taxis o furgoneta reservados. Es festivo: el tráfico suele ser ligero por la mañana.", tags:["Reservar traslado"], q:"Aeroporto di Fiumicino", tk:true},
+      {t:"12:35", n:"Vuelo VY6007 a Barcelona", d:"Conexión con el VY1464 a Bilbao, con llegada a las 17:20.", type:"rest"}
      ],
-     planb:"Si llueve o no os apetece el gentío: desayuno largo, último paseo por Piazza Navona y salida con calma. Si no conseguisteis Coliseo el lunes, esta mañana es vuestro plan B."}
+     planb:"Si alguien se despierta muy temprano y el alojamiento está en el centro, un último paseo a Trevi o al Panteón antes de las 8:30 se ve casi vacío."}
   ];
 
   const d5b = {
@@ -486,7 +550,23 @@ footer ul{padding-left:1.1em}
     em.href = eatUrl(""); em.textContent = foodLabel() + " cerca de mí";
     const hb = document.getElementById("homeBtn");
     if (home) { hb.hidden = false; hb.href = dirUrl(home); } else { hb.hidden = true; }
+    const fi = document.getElementById("fcoIn"), fo = document.getElementById("fcoOut");
+    fi.href = "https://www.google.com/maps/dir/?api=1&origin=" + enc("Aeroporto di Fiumicino") + "&destination=" + enc(home ? withRoma(home) : "Roma Termini") + "&travelmode=transit";
+    fi.textContent = home ? "Ruta del aeropuerto al alojamiento" : "Ruta del aeropuerto a Termini";
+    fo.href = "https://www.google.com/maps/dir/?api=1&" + (home ? "origin=" + enc(withRoma(home)) + "&" : "") + "destination=" + enc("Aeroporto di Fiumicino") + "&travelmode=transit";
   }
+  const zones = {
+    centro: "Recomendación: dos taxis oficiales. Son 110 € en total, unos 14 € por persona, y os dejan en la puerta. Con el tren tendríais que cambiar en Termini con maletas y cuatro niños para ahorrar solo unos 30 €.",
+    termini: "Recomendación: Leonardo Express. 32 minutos fijos sin atascos y unos 30 € menos que dos taxis. Comprad dos billetes «Minigruppo» de 4 personas en la app de Trenitalia o en las máquinas de la estación del aeropuerto.",
+    trastevere: "Recomendación: tren regional FL1 hasta la estación de Trastevere y un paseo o taxi corto. Es lo más barato; si vais con maletas grandes, mejor dos taxis.",
+    vaticano: "Recomendación: dos taxis oficiales. El Vaticano queda lejos de Termini y el tren apenas ahorra dinero a cambio de un transbordo con maletas."
+  };
+  const zoneSel = document.getElementById("zoneSel");
+  let zone = store.get("roma27-zone", "centro");
+  zoneSel.value = zone;
+  const showZone = () => { document.getElementById("zoneRec").textContent = zones[zone] || zones.centro; };
+  zoneSel.addEventListener("change", () => { zone = zoneSel.value; store.set("roma27-zone", zone); showZone(); });
+  showZone();
   foodSel.addEventListener("change", () => { food = foodSel.value; store.set("roma27-food", food); updateBar(); selectDay(current); });
   homeIn.addEventListener("change", () => { home = homeIn.value.trim(); store.set("roma27-home", home); updateBar(); });
   updateBar();
@@ -587,6 +667,8 @@ footer ul{padding-left:1.1em}
     "Mochila portabebés si hay algún peque: los adoquines y los carritos no se llevan bien",
     "Un punto de encuentro acordado por si alguien se separa en las multitudes",
     "Calcetín de la Befana comprado en Piazza Navona el día 2",
+    "Reserva del parking de Bilbao con la matrícula correcta de cada coche",
+    "Tarjetas de embarque de los 8 descargadas para los cuatro vuelos",
     "Revisar la semana antes los horarios de fiestas en las webs oficiales"
   ];
   const checks = store.get("roma27-checks", {});
